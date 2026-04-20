@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import {
   ArrowRight, UserPlus, Building2, Globe, Heart, ChevronRight, CheckCircle2, Shield
 } from 'lucide-react';
+import { useState, useEffect } from 'react';
 
 const PARTNERS = [
   { name: 'stanbic', logo: 'https://cdn.brandfetch.io/idtBHsdHkP/w/400/h/400/theme/dark/icon.jpeg?c=1dxbfHSJFAPEGdCLU4o5B' },
@@ -19,6 +20,50 @@ const PARTNERS = [
   { name: 'ACCION', logo: 'https://cdn.brandfetch.io/idH--0JiGV/w/504/h/288/theme/dark/logo.png?c=1dxbfHSJFAPEGdCLU4o5B' }
 ];
 
+function Typewriter({ text, delay = 40, startDelay = 400, className = "" }: { text: string; delay?: number; startDelay?: number; className?: string }) {
+  const [displayedText, setDisplayedText] = useState("");
+  const [isStarted, setIsStarted] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setIsStarted(true), startDelay);
+    return () => clearTimeout(timer);
+  }, [startDelay]);
+
+  useEffect(() => {
+    if (isStarted && currentIndex < text.length) {
+      const timeout = setTimeout(() => {
+        setDisplayedText(text.substring(0, currentIndex + 1));
+        setCurrentIndex(prev => prev + 1);
+      }, delay);
+      return () => clearTimeout(timeout);
+    }
+  }, [isStarted, currentIndex, delay, text]);
+
+  const highlightText = "Verified Opportunities.";
+  const highlightStart = text.indexOf(highlightText);
+  
+  const part1 = highlightStart !== -1 ? displayedText.substring(0, highlightStart) : displayedText;
+  const part2 = highlightStart !== -1 ? displayedText.substring(highlightStart) : "";
+  const isFinished = currentIndex === text.length;
+
+  return (
+    <span className={className}>
+      {part1}
+      {highlightStart !== -1 && displayedText.length > highlightStart && (
+        <br className="hidden sm:block" />
+      )}
+      {part2 && <span className="italic text-gradient">{part2}</span>}
+      {!isFinished && (
+        <span 
+          className="inline-block w-[2px] h-[0.9em] bg-brand-teal ml-1 animate-pulse align-middle transition-opacity duration-300" 
+          style={{ opacity: isStarted ? 1 : 0 }}
+        />
+      )}
+    </span>
+  );
+}
+
 export default function Landing() {
   return (
     <div className="bg-anthropic-surface">
@@ -26,9 +71,12 @@ export default function Landing() {
       <section className="relative overflow-hidden pt-24 pb-20 lg:pt-32 lg:pb-32">
         <div className="page-container relative z-10">
           <div className="max-w-4xl">
-            <h1 className="font-display text-display sm:text-display-lg text-anthropic-black mb-8 animate-reveal">
-              Connecting Refugees with <br />
-              <span className="italic text-gradient">Verified Opportunities.</span>
+            <h1 className="font-display text-display sm:text-display-lg text-anthropic-black mb-8 min-h-[2.2em] sm:min-h-[2.1em]">
+              <Typewriter 
+                text="Connecting Refugees with Verified Opportunities." 
+                delay={60}
+                className="animate-reveal"
+              />
             </h1>
             
             <p className="text-xl sm:text-2xl text-anthropic-muted leading-relaxed max-w-2xl mb-12 animate-fade-in animate-delay-100">
