@@ -86,6 +86,31 @@ export default function About() {
         </div>
       </section>
 
+      {/* ── Location Map ──────────────────────────────────── */}
+      <section className="section-padding bg-white border-b border-anthropic-border">
+        <div className="page-container">
+          <div className="text-center max-w-3xl mx-auto mb-12">
+            <h2 className="text-h1 mb-4">Visit Our Hub.</h2>
+            <p className="text-lg text-anthropic-muted">
+              We are located in the heart of Kampala, providing a dedicated space for verification, 
+              training, and community engagement.
+            </p>
+          </div>
+          <div className="w-full h-[450px] rounded-card overflow-hidden border border-anthropic-border shadow-anthropic animate-reveal">
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3989.7557764020953!2d32.55566767496467!3d0.32081469967603726!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMMKwMTknMTQuOSJOIDMywrAzMycyOS43IkU!5e0!3m2!1sen!2sug!4v1776701681696!5m2!1sen!2sug" 
+              width="100%" 
+              height="100%" 
+              style={{ border: 0 }} 
+              allowFullScreen 
+              loading="lazy" 
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Refugee Link Location"
+            ></iframe>
+          </div>
+        </div>
+      </section>
+
       {/* ── Call to Action ────────────────────────────────── */}
       <section className="section-padding bg-anthropic-surface">
         <div className="page-container text-center max-w-2xl mx-auto">
