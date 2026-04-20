@@ -1,0 +1,142 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply font-sans text-anthropic-black bg-anthropic-surface;
+    line-height: 1.6;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display text-anthropic-black;
+    line-height: 1.1;
+  }
+
+  ::selection {
+    @apply bg-light-blue text-light-blue-text;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-2.5 text-white font-semibold 
+           rounded-anthropic transition-all duration-300 shadow-anthropic
+           active:scale-[0.99] disabled:opacity-50 disabled:cursor-not-allowed;
+    background: linear-gradient(135deg, #55B9A6 0%, #8ED052 100%);
+  }
+
+  .btn-primary:hover {
+    filter: brightness(1.05);
+    @apply shadow-elevated;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-white text-anthropic-black font-medium 
+           border border-anthropic-border rounded-anthropic transition-all duration-200 hover:bg-anthropic-surface
+           active:scale-[0.99] disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-transparent font-medium 
+           border rounded-anthropic transition-all duration-200 active:scale-[0.99] min-h-[40px];
+    border-color: #55B9A6;
+    color: #55B9A6;
+  }
+
+  .btn-outline:hover {
+    background: linear-gradient(135deg, #55B9A6 0%, #8ED052 100%);
+    @apply text-white border-transparent;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 px-3 py-2 text-anthropic-muted font-medium 
+           rounded-anthropic transition-all duration-200 hover:text-anthropic-black hover:bg-black/5;
+  }
+
+  .card {
+    @apply bg-white border border-anthropic-border rounded-card p-8 shadow-anthropic transition-all duration-300 hover:shadow-elevated;
+  }
+
+  .card-static {
+    @apply bg-white border border-anthropic-border rounded-card p-8;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-3 bg-white border border-anthropic-border rounded-anthropic text-body text-anthropic-black 
+           placeholder:text-anthropic-muted/40 focus:outline-none focus:border-anthropic-black
+           transition-all duration-200;
+  }
+
+  .input-label {
+    @apply block text-label text-anthropic-black uppercase mb-2;
+  }
+
+  .tag {
+    @apply inline-flex items-center gap-1 px-2.5 py-0.5 bg-anthropic-surface border border-anthropic-border text-anthropic-muted text-xs font-medium rounded-anthropic;
+  }
+
+  .badge-verified {
+    @apply inline-flex items-center gap-1.5 px-2 py-0.5 bg-light-green text-light-green-text text-xs font-medium rounded-anthropic;
+  }
+
+  .badge-pending {
+    @apply inline-flex items-center gap-1.5 px-2 py-0.5 bg-light-blue text-light-blue-text text-xs font-medium rounded-anthropic;
+  }
+
+  .page-container {
+    @apply max-w-content mx-auto px-6 sm:px-10 lg:px-12;
+  }
+
+  .section-padding {
+    @apply py-20 sm:py-28 lg:py-32;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .text-gradient {
+    @apply text-transparent bg-clip-text;
+    background-image: linear-gradient(135deg, #55B9A6 0%, #8ED052 100%);
+  }
+
+  .animate-delay-100 {
+    animation-delay: 100ms;
+  }
+
+  .animate-delay-200 {
+    animation-delay: 200ms;
+  }
+
+  .animate-delay-300 {
+    animation-delay: 300ms;
+  }
+
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .animate-marquee {
+    animation: marquee 40s linear infinite;
+  }
+
+  .animate-marquee:hover {
+    animation-play-state: paused;
+  }
+}
