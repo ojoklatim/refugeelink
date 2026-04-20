@@ -122,7 +122,7 @@ export default function Landing() {
             <div className="relative">
               <div className="aspect-[4/5] bg-white border border-anthropic-border rounded-card overflow-hidden shadow-anthropic">
                 <img 
-                  src="/refugee_talent_hero_1776681187733.png" 
+                  src="/refugee_talent_hero.jpeg" 
                   alt="Refugee talent" 
                   className="w-full h-full object-cover grayscale-[20%] hover:grayscale-0 transition-all duration-700"
                 />
@@ -192,8 +192,8 @@ export default function Landing() {
       {/* ── CTA ───────────────────────────────────────────── */}
       <section className="bg-anthropic-black text-white py-24 relative overflow-hidden">
         <div className="page-container relative z-10 text-center max-w-3xl">
-          <h2 className="font-display text-4xl sm:text-5xl mb-8">Ready to unlock human potential?</h2>
-          <p className="text-xl text-white/70 mb-12">
+          <h2 className="font-display text-4xl sm:text-5xl mb-8 text-white">Ready to unlock human potential?</h2>
+          <p className="text-xl text-white mb-12">
             Whether you are a refugee looking to showcase your skills or an organisation 
             looking to hire, Refugee Link is your gateway to economic inclusion.
           </p>
