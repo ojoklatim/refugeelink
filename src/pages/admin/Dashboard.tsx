@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { usePlatformStats } from '../../hooks/useAdmin';
 import { useAllRefugees, useUpdateVerification } from '../../hooks/useRefugee';
 import { useAllOrgs, useApproveOrg } from '../../hooks/useOrganisation';
@@ -8,16 +8,22 @@ import {
   Shield, Users, Building2, Briefcase, CheckCircle2,
   AlertCircle, ChevronRight, XCircle, Clock
 } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-export default function AdminDashboard() {
+export default function AdminDashboard({ initialTab = 'overview' }: { initialTab?: 'overview' | 'refugees' | 'orgs' }) {
   const { data: stats, isLoading: statsLoading } = usePlatformStats();
   const { data: refugees, isLoading: refLoading } = useAllRefugees();
   const { data: orgs, isLoading: orgsLoading } = useAllOrgs();
   const updateVerification = useUpdateVerification();
   const approveOrg = useApproveOrg();
+  const navigate = useNavigate();
 
-  const [activeTab, setActiveTab] = useState<'overview' | 'refugees' | 'orgs'>('overview');
+  const [activeTab, setActiveTab] = useState<'overview' | 'refugees' | 'orgs'>(initialTab);
+
+  // Sync tab with prop if it changes (e.g. via navigation)
+  useEffect(() => {
+    setActiveTab(initialTab);
+  }, [initialTab]);
 
   if (statsLoading || refLoading || orgsLoading) {
     return <div className="min-h-[60vh] flex items-center justify-center"><LoadingSpinner size="lg" /></div>;
@@ -31,18 +37,19 @@ export default function AdminDashboard() {
     <div className="py-8 sm:py-12 bg-surface min-h-screen">
       <div className="page-container max-w-6xl">
         {/* Header */}
-        <div className="flex items-center gap-3 mb-8">
-          <div className="w-12 h-12 bg-navy rounded-xl flex items-center justify-center">
-            <Shield size={24} className="text-white" />
+        <div className="flex items-center gap-3 mb-6 sm:mb-8">
+          <div className="w-10 h-10 sm:w-12 sm:h-12 bg-navy rounded-xl flex items-center justify-center flex-shrink-0">
+            <Shield size={20} className="text-white sm:hidden" />
+            <Shield size={24} className="text-white hidden sm:block" />
           </div>
           <div>
-            <h1 className="text-h1 text-navy">Admin Portal</h1>
-            <p className="text-navy-muted text-sm">Platform oversight and verification</p>
+            <h1 className="text-h2 sm:text-h1 text-navy">Admin Portal</h1>
+            <p className="text-navy-muted text-xs sm:text-sm">Platform oversight and verification</p>
           </div>
         </div>
 
         {/* Tabs */}
-        <div className="flex items-center gap-2 mb-8 border-b border-border pb-px">
+        <div className="flex items-center gap-1 sm:gap-2 mb-6 sm:mb-8 border-b border-border pb-px overflow-x-auto">
           <TabButton active={activeTab === 'overview'} onClick={() => setActiveTab('overview')}>
             Overview
           </TabButton>
@@ -65,7 +72,7 @@ export default function AdminDashboard() {
               <StatCard icon={<CheckCircle2 />} label="Applications" value={stats?.totalApplications || 0} />
             </div>
 
-            <div className="grid lg:grid-cols-2 gap-6">
+            <div className="grid md:grid-cols-2 gap-4 sm:gap-6">
               {/* Action Required: Orgs */}
               <div className="card-static p-6">
                 <div className="flex items-center justify-between mb-4">
@@ -109,14 +116,14 @@ export default function AdminDashboard() {
                 {(pendingRefugees.length + unverifiedRefugees.length) === 0 ? (
                   <p className="text-sm text-navy-muted">No refugees waiting for verification.</p>
                 ) : (
-                  <div className="space-y-3">
+                  <div className="space-y-3 max-h-[400px] overflow-y-auto">
                     {[...pendingRefugees, ...unverifiedRefugees].slice(0, 5).map((ref) => (
                       <div key={ref.id} className="flex flex-col sm:flex-row sm:items-center justify-between p-3 border border-border rounded-lg gap-2">
                         <div>
                           <p className="text-sm font-semibold text-navy">{ref.full_name} <span className="font-mono text-[10px] text-navy-muted ml-1">{ref.ref_id}</span></p>
                           <p className="text-xs text-navy-muted">{ref.country_of_origin} · {ref.id_type.toUpperCase()}</p>
                         </div>
-                        <div className="flex gap-1">
+                        <div className="flex gap-1 flex-wrap sm:flex-nowrap">
                           <button
                             onClick={() => updateVerification.mutate({ id: ref.id, status: 'verified' })}
                             className="btn-outline px-3 py-1.5 min-h-0 text-xs border-forest text-forest hover:bg-forest hover:text-white"
@@ -149,7 +156,7 @@ export default function AdminDashboard() {
           <div className="card-static p-6">
             <h2 className="text-h3 text-navy mb-6">All Refugees</h2>
             <div className="overflow-x-auto">
-              <table className="w-full text-left text-sm">
+              <table className="w-full text-left text-sm min-w-[700px]">
                 <thead>
                   <tr className="border-b border-border text-navy-muted">
                     <th className="pb-3 font-medium">Ref ID</th>
@@ -210,7 +217,7 @@ export default function AdminDashboard() {
           <div className="card-static p-6">
             <h2 className="text-h3 text-navy mb-6">All Organisations</h2>
             <div className="overflow-x-auto">
-              <table className="w-full text-left text-sm">
+              <table className="w-full text-left text-sm min-w-[600px]">
                 <thead>
                   <tr className="border-b border-border text-navy-muted">
                     <th className="pb-3 font-medium">Name</th>

@@ -98,6 +98,16 @@ function App() {
                   <AdminDashboard />
                 </ProtectedRoute>
               } />
+              <Route path="admin/refugees" element={
+                <ProtectedRoute allowedRoles={['admin']}>
+                  <AdminDashboard initialTab="refugees" />
+                </ProtectedRoute>
+              } />
+              <Route path="admin/orgs" element={
+                <ProtectedRoute allowedRoles={['admin']}>
+                  <AdminDashboard initialTab="orgs" />
+                </ProtectedRoute>
+              } />
 
               {/* 404 Route */}
               <Route path="*" element={<NotFound />} />

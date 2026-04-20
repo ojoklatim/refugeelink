@@ -21,7 +21,7 @@ export default function Contact() {
       {/* ── Content ───────────────────────────────────────── */}
       <section className="section-padding">
         <div className="page-container">
-          <div className="grid lg:grid-cols-5 gap-20">
+          <div className="grid lg:grid-cols-5 gap-10 lg:gap-16">
             {/* Form */}
             <div className="lg:col-span-3">
               <div className="bg-white border border-anthropic-border rounded-card p-10 shadow-anthropic">

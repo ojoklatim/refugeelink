@@ -118,16 +118,16 @@ export default function Landing() {
       {/* ── Narrative Section ─────────────────────────────── */}
       <section className="section-padding">
         <div className="page-container">
-          <div className="grid lg:grid-cols-2 gap-20 items-center">
+          <div className="grid lg:grid-cols-2 gap-10 lg:gap-20 items-center">
             <div className="relative">
-              <div className="aspect-[4/5] bg-white border border-anthropic-border rounded-card overflow-hidden shadow-anthropic">
+              <div className="aspect-[4/5] sm:aspect-[4/4] lg:aspect-[4/5] bg-white border border-anthropic-border rounded-card overflow-hidden shadow-anthropic">
                 <img 
                   src="/refugee_talent_hero.jpeg" 
                   alt="Refugee talent" 
                   className="w-full h-full object-cover grayscale-[20%] hover:grayscale-0 transition-all duration-700"
                 />
               </div>
-              <div className="absolute -bottom-6 -right-6 p-6 bg-light-blue border border-anthropic-border rounded-card max-w-[240px] shadow-elevated">
+              <div className="relative mt-4 lg:absolute lg:-bottom-6 lg:-right-6 p-5 sm:p-6 bg-light-blue border border-anthropic-border rounded-card lg:max-w-[240px] shadow-elevated">
                 <p className="text-[15px] font-display text-light-blue-text leading-tight">
                   "Skill verification is the bridge between isolation and inclusion."
                 </p>
@@ -166,7 +166,7 @@ export default function Landing() {
       {/* ── Donation Section ─────────────────────────────── */}
       <section className="bg-white py-24 border-t border-anthropic-border">
         <div className="page-container">
-          <div className="bg-anthropic-surface border border-anthropic-border rounded-card p-12 md:p-16 flex flex-col md:flex-row items-center justify-between gap-12 relative overflow-hidden">
+          <div className="bg-anthropic-surface border border-anthropic-border rounded-card p-8 sm:p-12 md:p-16 flex flex-col md:flex-row items-center justify-between gap-8 sm:gap-12 relative overflow-hidden">
             <div className="max-w-xl relative z-10">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-light-green/20 text-light-green-text text-sm font-medium mb-6">
                 <Heart size={14} className="fill-current" />

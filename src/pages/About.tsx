@@ -23,7 +23,7 @@ export default function About() {
       {/* ── Core Philosophy ────────────────────────────────── */}
       <section className="section-padding">
         <div className="page-container">
-          <div className="grid lg:grid-cols-2 gap-20">
+          <div className="grid lg:grid-cols-2 gap-10 lg:gap-20">
             <div>
               <h2 className="text-h1 mb-8">The Challenge.</h2>
               <p className="text-lg text-anthropic-muted leading-relaxed mb-8">
@@ -31,7 +31,7 @@ export default function About() {
                 talent pools in East Africa. Despite having significant skills in technology, agriculture, 
                 and crafts, many remain in informal, precarious employment due to a lack of verified credentials.
               </p>
-              <div className="flex gap-4">
+              <div className="flex flex-col sm:flex-row gap-4">
                 <div className="flex-1 p-6 bg-light-blue border border-anthropic-border rounded-card">
                   <span className="text-3xl font-display text-light-blue-text">1.7M+</span>
                   <p className="text-[13px] uppercase tracking-widest text-light-blue-text/70 mt-2 font-semibold">Refugees in Uganda</p>
